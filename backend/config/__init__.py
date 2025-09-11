@@ -9,9 +9,8 @@ MONGO_URI = os.getenv("MONGO_URI")
 def get_database():
     try:
         client = AsyncIOMotorClient(MONGO_URI)
-        db = client.todo_db
-        todo_collection = db.todos
+        db = client['todo_db']
         print("Connected to MongoDB")
-        return db, todo_collection
+        return db
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
