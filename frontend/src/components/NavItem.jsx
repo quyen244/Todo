@@ -1,9 +1,9 @@
+
 import { NavLink } from "react-router-dom";
 
 const NavItem = ({ to, icon, label }) => {
   return (
     <li>
-        {/* nav link co ho tro isActive */}
       <NavLink
         to={to}
         className={({ isActive }) =>
@@ -18,5 +18,4 @@ const NavItem = ({ to, icon, label }) => {
   );
 };
 
-export default NavItem;
-
+export default NavItem

@@ -1,7 +1,5 @@
 
-import TaskList from "../api/TaskApi";
-import { useState } from "react";
-import { FaBell, FaPlus, FaCheck, FaClock, FaEdit, FaTrash, FaTasks } from "react-icons/fa";
+
 // ...existing code...
 import ButtonAddTask from "../components/Tasks/ButtonAdd";
 // Tasks Page

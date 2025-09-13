@@ -2,6 +2,24 @@
 import { FaTasks, FaCalendarAlt, FaChartPie, FaUser } from "react-icons/fa";
 // Sidebar Component
 import NavItem from "./NavItem";
+
+const routes = [
+	{ to: "tasks",  icon : <FaTasks /> , label: "Tasks"},
+	{ to: "calendar", icon : <FaCalendarAlt /> , label: "Calendar" },
+	{  to: "progress",  icon : <FaChartPie /> , label: "Progress" },
+	{  to: "profile", icon : <FaUser /> , label: "Profile"},
+];
+
+const NavMenu = ({ routes }) => (
+  <>
+    {routes.map((route, i) => (
+      <NavItem key={i} {...route} idx={i} />
+    ))}
+  </>
+);
+
+
+
 const Sidebar = () => {
   return (
     <aside className="w-64 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 shadow-2xl flex flex-col relative overflow-hidden">
@@ -22,26 +40,7 @@ const Sidebar = () => {
       {/* Menu */}
       <nav className="flex-1 relative z-10 px-4">
         <ul className="space-y-3">
-          <NavItem 
-            to="tasks" 
-            icon={<FaTasks />} 
-            label="Tasks" 
-          />
-          <NavItem 
-            to="calendar" 
-            icon={<FaCalendarAlt />} 
-            label="Calendar" 
-          />
-          <NavItem 
-            to="progress" 
-            icon={<FaChartPie />} 
-            label="Progress" 
-          />
-          <NavItem 
-            to="profile" 
-            icon={<FaUser />} 
-            label="Profile" 
-          />
+          <NavMenu routes = {routes}/>
         </ul>
       </nav>
       
