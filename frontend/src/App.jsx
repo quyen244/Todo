@@ -5,10 +5,11 @@ import './index.css';
 function App() {
 
   return (
-
-     <Layout />
- 
+   <div className = "overflow-x-hidden"> 
+       <Layout />
+   </div>
   );
 }
 
 export default App;
+

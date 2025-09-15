@@ -4,9 +4,9 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 class Priority(str, Enum):
-    low = "low"
-    medium = "medium"
-    high = "high"
+    low = 1
+    medium = 2
+    high = 3
 
 class Repeat(str, Enum):
     none = "none"
@@ -18,14 +18,11 @@ class Repeat(str, Enum):
 
 class Task(BaseModel):
     id: Optional[str] = Field(default=None, alias="_id")
-    user_id: str  # tham chiếu đến User
     title: str
     description: Optional[str] = None
     completed: bool = False
-    priority: Priority = Priority.medium
+    priority: int 
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     deadline: Optional[datetime] = None
-    reminder: Optional[datetime] = None
-    repeat: Repeat = Repeat.none
     reminder_before: Optional[int] = None  # phút trước deadline

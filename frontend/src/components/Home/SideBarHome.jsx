@@ -49,11 +49,11 @@ const SideBarHome = () => {
 	return (
 		<div className="">
 			<nav>
-				<div className="fixed top-0 left-0 w-screen bg-gradient-to-br from-[#EFEFBB] to-[#D4D3DD] shadow-lg border-b border-amber-200 z-50 p-3">
+        <div className="fixed top-0 left-0 w-full bg-white border-b border-amber-200 z-50 p-1 rounded-md">
 					<div className="flex justify-between items-center px-8 py-4">
 						<a 
 							className="font-black text-3xl text-amber-900 hover:text-amber-800 transition-colors duration-300 pl-16" 
-							href="#!"
+							href ="/home"
 						>
 							Easy Frontend
 						</a>

@@ -1,14 +1,15 @@
-
-import { FaTasks, FaCalendarAlt, FaChartPie, FaUser } from "react-icons/fa";
-// Sidebar Component
-import NavItem from "./NavItem";
+import React from 'react';
+import { FaPlus, FaSearch, FaInbox, FaCalendarDay, FaCalendarAlt, FaFilter, FaCheckCircle, FaFolder, FaQuestionCircle } from 'react-icons/fa';
+import NavItem from './NavItem';
+import PropTypes from 'prop-types';
+import ButtonAddTask from './Tasks/ButtonAdd';
 
 const routes = [
-	{ to: "tasks",  icon : <FaTasks /> , label: "Tasks"},
-	{ to: "calendar", icon : <FaCalendarAlt /> , label: "Calendar" },
-	{  to: "progress",  icon : <FaChartPie /> , label: "Progress" },
-	{  to: "profile", icon : <FaUser /> , label: "Profile"},
+  { to: "today", icon: <FaInbox/>, label: "Today" },
+  { to: "upcoming", icon: <FaCalendarAlt/>, label: "Upcoming" },
+  { to: "progress", icon: <FaCheckCircle/>, label: "Progress" }
 ];
+
 
 const NavMenu = ({ routes }) => (
   <>
@@ -18,37 +19,57 @@ const NavMenu = ({ routes }) => (
   </>
 );
 
-
+NavMenu.propTypes = {
+routes: PropTypes.array.isRequired,
+};
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 shadow-2xl flex flex-col relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-400/20 via-transparent to-transparent"></div>
-      
-      {/* Logo */}
-      <div className="p-6 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 relative z-10">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-            <FaTasks className="text-white text-sm" />
+    <aside className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col">
+      {/* Header with user */}
+      <div className="p-4 border-b border-gray-200">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+            <span className="text-white font-medium text-sm">Q</span>
           </div>
-          <span>TodoFlow</span>
+          <span className="font-medium text-gray-900">Quyền</span>
+          <div className="ml-auto">
+            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
       </div>
 
-      {/* Menu */}
-      <nav className="flex-1 relative z-10 px-4">
-        <ul className="space-y-3">
+      {/* Add Task Button */}
+      <div className="p-4">
+        <ButtonAddTask/>
+      </div>
+
+      {/* Search */}
+      <div className="px-4 pb-4">
+        <div className="relative">
+          <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      {/* Navigation Menu */}
+      <nav className="flex-1 px-4">
+        <div className="space-y-1">
           <NavMenu routes = {routes}/>
-        </ul>
+        </div>
       </nav>
-      
-      {/* Bottom decoration */}
-      <div className="p-6 relative z-10">
-        <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-          <p className="text-white/70 text-sm">Stay productive!</p>
-          <p className="text-white/50 text-xs mt-1">4 tasks remaining</p>
+
+      {/* Help & Resources */}
+      <div className="p-4 border-t border-gray-200">
+        <div className="flex items-center gap-3 py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-md cursor-pointer">
+          <FaQuestionCircle className="w-4 h-4 text-orange-500" />
+          <span className="text-sm">Help & resources</span>
         </div>
       </div>
     </aside>
@@ -56,3 +77,25 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+        // {/* Projects Section */}
+        // <div className="mt-6">
+        //   <div className="flex items-center gap-2 py-2 px-2 text-gray-700">
+        //     <FaFolder className="w-4 h-4 text-orange-500" />
+        //     <span className="font-medium">My Projects</span>
+        //     <svg className="w-4 h-4 text-gray-400 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        //       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        //     </svg>
+        //   </div>
+          
+        //   {/* Project item */}
+        //   <div className="ml-6 py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-md cursor-pointer">
+        //     <div className="flex items-center gap-3">
+        //       <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+        //       <span>hihi</span>
+        //       <svg className="w-4 h-4 text-gray-400 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        //         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        //       </svg>
+        //     </div>
+        //   </div>
+        // </div>

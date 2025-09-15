@@ -1,107 +1,38 @@
-// RegisterForm.jsx
+// SignUp.jsx
 import React from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
+import RegisterForm from "../components/Auth/RegisterForm"
 
-// 1. Schema validate với Zod
-const registerSchema = z
-  .object({
-    username: z.string().min(3, "Tên phải có ít nhất 3 ký tự"),
-    email: z.string().email("Email không hợp lệ"),
-    password: z.string().min(6, "Mật khẩu tối thiểu 6 ký tự"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Mật khẩu xác nhận không khớp",
-    path: ["confirmPassword"],
-  })
-
-// 2. Component RegisterForm
 export default function SignUp() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(registerSchema),
-  })
-
-  const onSubmit = (data) => {
-    console.log("Form Data:", data)
-  }
-
   return (
-   <div className = "min-h-screen w-screen flex items-center justify-center pb-16">
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-md mx-auto p-6 bg-white rounded-xl shadow"
-    >
-        <h2 className="text-2xl font-bold mb-4">Đăng ký</h2>
+    <div className="min-h-screen w-screen flex items-center justify-center p-4 bg-gradient-to-br from-white to-blue relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-white/5 rounded-full blur-2xl animate-pulse delay-500"></div>
+      </div>
 
-        {/* Username */}
-        <div className="mb-4">
-            <label className="block mb-1 font-medium">Tên đăng nhập</label>
-            <input
-            {...register("username")}
-            className="w-full border p-2 rounded focus:outline-blue-500"
-            placeholder="Tên của bạn"
-            />
-            {errors.username && (
-            <p className="text-red-500 text-sm">{errors.username.message}</p>
-            )}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-6xl">
+        {/* Cột bên trái (form) */}
+        <div className="flex-1 flex items-center justify-center">
+          <RegisterForm />
         </div>
 
-        {/* Email */}
-        <div className="mb-4">
-            <label className="block mb-1 font-medium">Email</label>
-            <input
-            {...register("email")}
-            className="w-full border p-2 rounded focus:outline-blue-500"
-            placeholder="example@gmail.com"
+        {/* Cột bên phải (ảnh + quote) */}
+        <div className="flex-1 flex items-center justify-center p-4">
+          <div className="text-center">
+            <img
+              src="https://blog.advantageclub.co/wp-content/uploads/2023/01/ezgif.com-gif-maker-18.webp"
+              alt="illustration"
+              className="w-full max-w-xl h-64 sm:h-80 md:h-96 lg:h-[36rem] object-cover rounded-lg"
             />
-            {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-        </div>
-
-        {/* Password */}
-        <div className="mb-4">
-            <label className="block mb-1 font-medium">Mật khẩu</label>
-            <input
-            type="password"
-            {...register("password")}
-            className="w-full border p-2 rounded focus:outline-blue-500"
-            placeholder="******"
-            />
-            {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
-            )}
-        </div>
-
-        {/* Confirm Password */}
-        <div className="mb-4">
-            <label className="block mb-1 font-medium">Xác nhận mật khẩu</label>
-            <input
-            type="password"
-            {...register("confirmPassword")}
-            className="w-full border p-2 rounded focus:outline-blue-500"
-            placeholder="******"
-            />
-            {errors.confirmPassword && (
-            <p className="text-red-500 text-sm">
-                {errors.confirmPassword.message}
+            <p className="text-gray-700 italic">
+              "Before Todoist, my to-do lists were scattered all around! Now,
+              everything is in order and in one place."
             </p>
-            )}
+          </div>
         </div>
-
-        <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
-            Đăng ký
-        </button>
-    </form>
-   </div>
+      </div>
+    </div>
   )
 }
